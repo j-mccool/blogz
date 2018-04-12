@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div id = 'blogbox'>
+<h1>Add Blog Post</h1>
+<form method='POST'>
+    <label>New Post:
+        <input type="text" name="title" />
+        <input type="text" name="body" />
+    </label>
+        <input type="submit" value="Add Post" />
+</form>
+</div>
+
+<hr /> {% if posts|length == 0 %}
+<p>No posts yet. Create one using the inputs above!</p>
+{% else %}
+
+<ul>
+    {% for blog in posts %}
+    <hr />
+    <ul>{{blog.title}}</ul>
+    <ul>{{blog.body}}</ul>
+    {% endfor %}
+</ul>
+
+{% endif %}
+{% endblock %}
