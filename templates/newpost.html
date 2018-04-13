@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+
+<div id='blogbox'>
+    <h1>Add Blog Post</h1>
+    <form method='POST'>
+        <p>
+        <label>Title:
+            <input type="text" name="title" value="{{blog_title}}" />
+             {% if t_error %}
+            <span class="error">{{t_error}}</span>
+            {% endif %}
+        </label>
+        </p>
+        <p>
+        <label>Body:
+            <input type="text" id="body" name="body" value="{{blog_post}}" />
+             {% if b_error %}
+            <span class="error">{{b_error}}</span>
+            {% endif %}
+        </label>
+        </p>
+        <input type="submit" value="Add Post" />
+    </form>
+</div>
+{% endblock %}

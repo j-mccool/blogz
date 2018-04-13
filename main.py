@@ -20,20 +20,37 @@ class Blog(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    posts = Blog.query.all()
+    return render_template('blog.html', posts=posts)
 
-@app.route('/blog', methods=['POST', 'GET'])
-def blog():
+@app.route('/newpost', methods=['POST', 'GET'])
+def newpost():
     if request.method == 'POST':
         blog_title = request.form['title']
         blog_body = request.form["body"]
-    
-        new_post = Blog(blog_title, blog_body)
-        db.session.add(new_post)
-        db.session.commit()
+        t_error = ''
+        b_error = ''
 
-    posts = Blog.query.all()
-    return render_template('blog.html', posts=posts)
+        if blog_title == '':
+            t_error = "Please enter a title."
+        if blog_body == '':
+            b_error = "Please enter something for your post."
+
+        if not t_error and not b_error:    
+            new_post = Blog(blog_title, blog_body)
+            db.session.add(new_post)
+            db.session.commit()
+            posts = Blog.query.all()
+            return render_template('blog.html', posts=posts)
+        else:
+            return render_template('newpost.html', t_error=t_error, b_error=b_error, blog_title=blog_title, blog_body=blog_body)
+
+@app.route('/entry', methods=['GET'])
+def display_entry():
+    id = request.args.get('id')
+    blog = Blog.query.filter_by(Blog.id == id).first()
+    title = Blog.title
+    return render_template('entry.html', id = id, blog_title = blog_title)
 
 if __name__ == '__main__':
     app.run()
