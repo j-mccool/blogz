@@ -48,9 +48,10 @@ def newpost():
 @app.route('/entry', methods=['GET'])
 def display_entry():
     id = request.args.get('id')
-    blog = Blog.query.filter_by(Blog.id == id).first()
-    title = Blog.title
-    return render_template('entry.html', id = id, blog_title = blog_title)
+    blog = Blog.query.get(id)
+    title = blog.title
+    body = blog.body
+    return render_template('entry.html', blog_title = title, blog_body = body)
 
 if __name__ == '__main__':
     app.run()
