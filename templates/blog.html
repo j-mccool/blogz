@@ -9,7 +9,7 @@
     {% for blog in posts %}
         {% set link = blog.id %}
     <hr />
-    <ul><a href="/entry?id={{link}}" ><strong>{{blog.title}}</strong></ul></a>
+    <ul><a href="/blog?id={{link}}" ><strong>{{blog.title}}</strong></ul></a>
     <ul>{{blog.body}}</ul>
     {% endfor %}
 </ul>

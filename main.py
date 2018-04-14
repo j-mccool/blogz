@@ -18,10 +18,18 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
-@app.route('/')
-def index():
+@app.route('/blog')
+def blog():
     posts = Blog.query.all()
-    return render_template('blog.html', posts=posts)
+    id = request.args.get('id')
+    if not id:
+        return render_template('blog.html', posts=posts)
+    else:
+        blog = Blog.query.get(id)
+        title = blog.title
+        body = blog.body
+        return render_template('entry.html', blog_title=title, blog_body=body)
+
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
@@ -41,20 +49,12 @@ def newpost():
             db.session.add(new_post)
             db.session.commit()
             newest_post = db.session.query(Blog).order_by(Blog.id.desc()).first()
-            n_title = newest_post.title
-            n_body = newest_post.body
-            return render_template('entry.html', blog_title = n_title, blog_body = n_body)
+            id = str(newest_post.id)
+            return redirect("/blog?id=" + id)
         else:
             return render_template('newpost.html', t_error=t_error, b_error=b_error, blog_title=blog_title, blog_body=blog_body)
     else:
         return render_template('newpost.html')
-@app.route('/entry', methods=['GET'])
-def display_entry():
-    id = request.args.get('id')
-    blog = Blog.query.get(id)
-    title = blog.title
-    body = blog.body
-    return render_template('entry.html', blog_title = title, blog_body = body)
 
 if __name__ == '__main__':
     app.run()

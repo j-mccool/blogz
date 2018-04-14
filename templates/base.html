@@ -4,13 +4,62 @@
 <head>
     <!--<title>{{title}}</title>-->
     <title>Build-A-Blog</title>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    
+        form {
+            margin: auto;
+            padding: 5px;
+        }
+    
+        label span {
+            display: inline-block;
+            width: 20%;
+            text-align: right;
+        }
+    
+        #submit {
+            padding: 5px;
+            margin-left: 10%;
+        }
+    
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: rgb(155, 186, 196);
+            color: rgb(229, 238, 99);
+        }
+        h1 {
+            text-align: center;
+        }
+        #newpost_entry {
+            margin-left: 20%;
+            padding: 20px;
+        }
+        #blog_textbox {
+
+        }
+        #navbar {
+            text-align: right;
+            margin-right: 20%
+        }
+        #navbar a:link,
+        #navbar a:hover,
+        #navbar a:visited {
+            color: rgb(229, 238, 99);
+        }
+        }
+    </style>
 </head>
 
 <body>
-    <div>
+    <div id="navbar">
         <!--<a href="/logout">Logout</a>-->
-        <a href="/">Main Page</a>
-        <a href="/newpost">Add New Post</a>
+        <strong><p><a href="/blog">Main Page</a></p>
+
+        <p><a href="/newpost">Add New Post</a></p></strong>
     </div>
     {% block content %} 
     
