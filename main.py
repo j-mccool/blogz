@@ -40,11 +40,14 @@ def newpost():
             new_post = Blog(blog_title, blog_body)
             db.session.add(new_post)
             db.session.commit()
-            posts = Blog.query.all()
-            return render_template('blog.html', posts=posts)
+            newest_post = db.session.query(Blog).order_by(Blog.id.desc()).first()
+            n_title = newest_post.title
+            n_body = newest_post.body
+            return render_template('entry.html', blog_title = n_title, blog_body = n_body)
         else:
             return render_template('newpost.html', t_error=t_error, b_error=b_error, blog_title=blog_title, blog_body=blog_body)
-
+    else:
+        return render_template('newpost.html')
 @app.route('/entry', methods=['GET'])
 def display_entry():
     id = request.args.get('id')
