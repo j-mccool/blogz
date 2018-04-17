@@ -4,63 +4,31 @@
 <head>
     <!--<title>{{title}}</title>-->
     <title>Build-A-Blog</title>
-    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
-    
-    <style type="text/css">
-        .error {
-            color: red;
-        }
-    
-        form {
-            margin: auto;
-            padding: 5px;
-        }
-    
-        label span {
-            display: inline-block;
-            width: 20%;
-            text-align: right;
-            
-        }
-    
-        #submit {
-            padding: 5px;
-            margin-left: 10%;
-        }
-    
-        body {
-            font-family: 'Ubuntu', sans-serif;
-            background-color: rgb(155, 186, 196);
-            color: rgb(229, 238, 99);
-        }
-        h1 {
-            text-align: center;
-        }
-        #newpost_entry {
-            margin-left: 20%;
-            padding: 20px;
-            vertical-align: top;
-        }
-        #navbar {
-            text-align: right;
-            margin-right: 20%
-        }
-        #navbar a:link,
-        #navbar a:hover,
-        #navbar a:visited {
-            color: rgb(229, 238, 99);
-        }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
 </head>
 
-<body>
-    <div id="navbar">
-        <!--<a href="/logout">Logout</a>-->
-        <strong><p><a href="/blog">Main Page</a></p>
+<nav class="navbar navbar-expand-lg fixed-top ">
+    <a class="navbar-brand" href="/blog">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <p><a href="/newpost">Add New Post</a></p></strong>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-4">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/newpost">New Blog Post</a>
+            </li>
+
+        </ul>
     </div>
+</nav>
+
+<body class="main">
     {% block content %} 
     
     {% endblock %}

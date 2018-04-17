@@ -1,24 +1,33 @@
 {% extends "base.html" %} {% block content %}
 
-    <h1>Add Blog Post</h1>
-    <div id="newpost_entry">
-        <form method='POST'>
-            <p>
-            <label>Title:
-                <input type="text" name="title" value="{{blog_title}}" />
-                {% if t_error %}
-                <span class="error">{{t_error}}</span>
-                {% endif %}
-            </label>
-            </p>
-            <p class="vert_align">
-            <label for="blog_textbox">Body:</label>
-                <textarea rows="20" cols="50" id="blog_textbox" name="body" value="{{blog_post}}"></textarea>
-                {% if b_error %}
-                <span class="error">{{b_error}}</span>
-                {% endif %}
-            </p>
-            <input type="submit" value="Add Post" />
-        </form>
+    <!-- NewPost form -->
+    <h1 class="text-center">New Post</h1>
+    <div class="newpost-form">
+        <div class="container">
+            <form method='POST'>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <h1>Add a new post</h1>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 right">
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-lg" placeholder="{{blog_title}}" name="title" >
+                            {% if t_error %}
+                            <span class="error">{{t_error}}</span>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control form-control-lg" placeholder="{{blog_body}}" name="body">
+              
+                            </textarea>
+                            {% if b_error %}
+                            <span class="error">{{b_error}}</span>
+                            {% endif %}
+                        </div>
+                        <input type="submit" class="btn btn-secondary btn-block" value="Add Post" name="">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}

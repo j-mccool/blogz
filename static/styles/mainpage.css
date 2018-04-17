@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+html,h1,h2,h3,h4,h5,h6,a{
+ font-family: "Ubuntu";
+}
+
+.error {
+    color: red;
+}
+.navbar{
+ background:#f4a742;
+}
+.nav-link , .navbar-brand{
+ color: #fff;
+ cursor: pointer;
+}
+.nav-link{
+ margin-right: 1em !important;
+}
+.nav-link:hover{
+ background: #f4f4f4;
+ color:#fff;
+}
+.navbar-collapse{
+ justify-content: flex-end;
+}
+.navbar-toggler{
+  background:#fff !important;
+}
+
+.blog{
+ margin: 4em 0;
+ position: relative; 
+}
+.blog h1{
+ color: #fff;
+ font-weight: bold;
+ margin: 2em; 
+}
+.blog .card{
+ box-shadow: 0 0 20px rgb(245, 188, 134);
+ background-color: #f4a742;
+ margin: 1em;
+}
+.blog .card-title{
+ color: #fff;
+  
+}
+.blog .card-body{
+ padding: 1em;
+}
+
+.newpost-form{
+ margin: 6em 0;
+ position: relative;  
+}
+
+.newpost-form h1{
+ padding:2em 1px;
+ color: #F97300; 
+}
+.newpost-form .right{
+ max-width: 600px;
+}
+.newpost-form .right .btn-secondary{
+ background:  #F97300;
+ color: #fff;
+ border:0;
+}
+.newpost-form .right .form-control::placeholder{
+ color: #888;
+ font-size: 16px;
+}
+
+form span {
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    
+}
+
+.individual_post{
+    margin: 6em 0;
+    position: relative;
+}
+
+.main {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #ffcc7a;
+    color: #fff;
+}

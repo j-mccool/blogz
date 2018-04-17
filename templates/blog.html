@@ -1,18 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 id="blog_header">Blog Posts</h1>
-<hr /> {% if posts|length == 0 %}
-<p>No posts yet. Create one using the inputs above!</p>
-{% else %}
+<div class="blog">
+    <div class="container">
+        <h1 class="text-center">Blog Posts</h1>
+    
+        <div class="row">
+             {% for blog in posts %} 
+                {% set link = blog.id %}
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{blog.title}}</h4>
+                        <p class="card-text">
+                            {{blog.body}}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/blog?id={{link}}" class="card-link">Read more</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
-<ul>
-    {% for blog in posts %}
-        {% set link = blog.id %}
-    <hr />
-    <ul><a href="/blog?id={{link}}" ><strong>{{blog.title}}</strong></ul></a>
-    <ul>{{blog.body}}</ul>
-    {% endfor %}
-</ul>
 
-{% endif %}
 {% endblock %}

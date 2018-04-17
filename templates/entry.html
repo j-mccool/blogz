@@ -1,6 +1,16 @@
 {% extends "base.html" %} {% block content %}
 
-<h1>{{blog.title}}</h1>
-<p>{{blog.body}}</p>
+<div class="individual_post">
+    <div class="container">
+        <div class="blog_title">
+            <h2 class="text-center">{{blog.title}}</h2>
+        </div>
+        <div class="blog_body">
+            <p>
+                {{blog.body}}
+            </p>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
