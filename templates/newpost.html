@@ -11,13 +11,12 @@
                 {% endif %}
             </label>
             </p>
-            <p>
-            <label>Body:
-                <input type="textarea" id="blog_textbox" name="body" value="{{blog_post}}" />
+            <p class="vert_align">
+            <label for="blog_textbox">Body:</label>
+                <textarea rows="20" cols="50" id="blog_textbox" name="body" value="{{blog_post}}"></textarea>
                 {% if b_error %}
                 <span class="error">{{b_error}}</span>
                 {% endif %}
-            </label>
             </p>
             <input type="submit" value="Add Post" />
         </form>
