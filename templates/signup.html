@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block content %}
+<div class="container blog">
+    <h1 class="text-center">Signup</h1>
+    <form action="/signup" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="username">Username:</label>
+                </td>
+                <td>
+                    <input name="username" type="text" value="{{ username }}">
+                    {% if u_error %}
+                    <span class="error">{{u_error}}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">Password: </label>
+                </td>
+                <td>
+                    <input name="password" type="password">
+                    {% if p_error %}
+                    <span class="error">{{p_error}}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="verify">Verify Password: </label>
+                </td>
+                <td>
+                    <input name="verify" type="password">
+                    {% if v_error %}
+                    <span class="error">{{v_error}}</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="SignUp">
+    </form>
+</div>
+{% endblock %}
