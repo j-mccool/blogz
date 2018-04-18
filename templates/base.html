@@ -3,9 +3,16 @@
 
 <head>
     <title>Build-A-Blog</title>
+<<<<<<< Updated upstream
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous" />
+=======
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url for('static', filename='styles/css/bootstrap.min.css) }}'" />
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"> -->
+>>>>>>> Stashed changes
 
 </head>
 
@@ -25,22 +32,38 @@
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
             </li>
+<<<<<<< Updated upstream
             <li class="nav-item">
                 <a class="nav-link" href="/signup">Signup</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
+=======
+            {% if session: %}
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+             {% endif %}
+>>>>>>> Stashed changes
         </ul>
     </div>
 </nav>
 
 <div class="container">
+<<<<<<< Updated upstream
     <div class = "messages">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul>
             {% for message, category in messages %}
+=======
+    <div class = "blog">
+     {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+>>>>>>> Stashed changes
             <li class="{{cagetory}}">{{ message }}</li>
             {% endfor %}
         </ul>
@@ -48,6 +71,7 @@
     {% endwith %}
     </div>
 </div>
+<<<<<<< Updated upstream
 <div class='status'>
     {% if session %}
         Status - Logged In
@@ -55,6 +79,9 @@
         Status -Not Logged In
     {% endif %}
 </div>
+=======
+    
+>>>>>>> Stashed changes
 <body class="main">
 
     {% block content %} 
