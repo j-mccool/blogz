@@ -6,6 +6,9 @@ html,h1,h2,h3,h4,h5,h6,a{
 .error {
     color: red;
 }
+.success {
+    color: rgb(13, 35, 228);
+}
 .navbar{
  background:#f4a742;
 }
@@ -77,6 +80,7 @@ form span {
     text-align: right;
     
 }
+
 
 .individual_post{
     margin: 6em 0;

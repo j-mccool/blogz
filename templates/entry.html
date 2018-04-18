@@ -7,7 +7,9 @@
         </div>
         <div class="blog_body">
             <p>
-                {{blog.body}}
+            {% for line in blog.body.splitlines() %} 
+            {{line}}<br> 
+            {% endfor %}
             </p>
         </div>
     </div>
