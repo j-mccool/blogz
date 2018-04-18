@@ -114,7 +114,7 @@ def signup():
                 db.session.commit()
                 session['username'] = username
                 flash('New User Created - Logged In!', 'success')
-                return redirect('/blog')
+                return redirect('/newpost')
             else:
                 flash('Oops! Looks like we already have a user by that name.', 'error')
                 return render_template('signup.html', username=username)

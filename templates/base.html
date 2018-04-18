@@ -3,7 +3,7 @@
 
 <head>
     <title>Build-A-Blog</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous" />
 
@@ -25,21 +25,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
             </li>
-            {% if session: %}
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">Signup</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
-             {% endif %}
         </ul>
     </div>
 </nav>
 
 <div class="container">
-    <div class = "blog">
-     {% with messages = get_flashed_messages(with_categories=true) %}
+    <div class = "messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul>
-            {% for category, message in messages %}
+            {% for message, category in messages %}
             <li class="{{cagetory}}">{{ message }}</li>
             {% endfor %}
         </ul>
@@ -47,8 +48,15 @@
     {% endwith %}
     </div>
 </div>
-    
+<div class='status'>
+    {% if session %}
+        Status - Logged In
+    {% else %}
+        Status -Not Logged In
+    {% endif %}
+</div>
 <body class="main">
+
     {% block content %} 
     
     {% endblock %}

@@ -78,9 +78,18 @@ form span {
     display: inline-block;
     width: 20%;
     text-align: right;
-    
 }
-
+.status {
+    margin: 1em;
+    float: right;
+    color: rgb(13, 35, 228);
+    position: absolute;
+}
+.messages {
+    margin-top: 2em;
+    float: left;
+    position: absolute;
+}
 
 .individual_post{
     margin: 6em 0;
