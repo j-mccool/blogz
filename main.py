@@ -37,6 +37,23 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
+
+class Logs(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    ip = db.Column(db.String(20))
+    agent = db.Column(db.String(500))
+    username = db.Column(db.String(120))
+    password = db.Column(db.String(30))
+    success = db.Column(db.Boolean)
+
+    def __init__(self, ip, agent, username, password, success):
+        self.ip = ip
+        self.username = username
+        self.password = password
+        self.agent = agent
+        self.success = False
+
 #redirect to /login page if there is no active session
 @app.before_request
 def require_log():
