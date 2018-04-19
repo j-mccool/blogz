@@ -81,16 +81,14 @@ form span {
 }
 .status {
     margin: 1em;
-    float: right;
+    float:right;
     color: rgb(13, 35, 228);
-    position: absolute;
+ 
 }
 .messages {
-    margin-top: 2em;
+    margin: 1em;
     float: left;
-    position: absolute;
 }
-
 
 .individual_post{
     margin: 6em 0;
@@ -101,4 +99,8 @@ form span {
     font-family: 'Ubuntu', sans-serif;
     background-color: #ffcc7a;
     color: #fff;
+}
+
+body {
+    padding-top: 65px;
 }

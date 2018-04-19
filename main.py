@@ -83,17 +83,17 @@ def newpost():
     if request.method == 'POST':
         blog_title = request.form['title']
         blog_body = request.form["body"]
-        t_error = ''
-        b_error = ''
+        error = ''
+        
 
         if blog_title == '':
-            t_error = 'yes'
+            error = 'yes'
             flash("Please enter a title.", 'error')
         if blog_body == '':
-            b_error = 'yes'
+            error = 'yes'
             flash("Please enter some text for your post.", 'error')
 
-        if not t_error and not b_error:    
+        if not error and not error:    
             new_post = Blog(blog_title, blog_body, owner)
             db.session.add(new_post)
             db.session.commit()
@@ -101,7 +101,7 @@ def newpost():
             id = str(newest_post.id)
             return redirect("/blog?id=" + id)
         else:
-            return render_template('newpost.html', blog_title=blog_title, blog_body=blog_body)
+            return render_template('newpost.html', blog_title=blog_title, blog_body=blog_body, error=error)
     else:
         return render_template('newpost.html')
 #signup route - username/pword must be > 3, passwords must match, username/pword can't be null
@@ -134,7 +134,7 @@ def signup():
                 return redirect('/newpost')
             else:
                 flash('Oops! Looks like we already have a user by that name.', 'error')
-                return render_template('signup.html', username=username)
+                return render_template('signup.html', username=username, error=error)
         else:
             return render_template('signup.html', username=username)
     return render_template('signup.html')
@@ -151,7 +151,7 @@ def login():
             flash('Logged In!', 'success')
             return redirect('/newpost')
         elif not user:
-            flash('Username doesn\'t exist. Please try again!', 'error')
+            flash('Username does not exist. Please try again!', 'error')
             return redirect('/login')
         else:
             flash('Incorrect password. Please try again.', 'error')
