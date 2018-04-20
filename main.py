@@ -66,13 +66,13 @@ def require_log():
 @app.route('/')
 def index():
     users = User.query.all()
-    user_id = request.args.get('user')
-    if not user_id:
+    username = request.args.get('user')
+    if not username:
         return render_template('index.html', users = users)
     else:
-        user = User.query.get(user_id)
+        user = User.query.filter_by(username=username).first()
         user_posts = Blog.query.filter_by(owner_id=user).order_by(Blog.post_date.desc()).all()
-        return render_template('blog.html', posts=user_posts)
+        return render_template('blog.html', posts=user_posts, user=user)
 
 #main route that should display all posts: most recent first
 @app.route('/blog')
@@ -81,12 +81,24 @@ def blog():
     posts = Blog.query.order_by(Blog.post_date.desc()).all()
     #get the 'id' param from the string
     id = request.args.get('id')
-    if not id:
+    username = request.args.get('user')
+    while id:
+        blog=Blog.query.get(id)
+        user = User.query.filter_by(id=blog.owner_id).first()
+        return render_template('entry.html', blog=blog, author=user.username)
+    while username:
+        user = User.query.filter_by(username=username).first()
+        user_posts = Blog.query.filter_by(owner_id=user.id).order_by(Blog.post_date.desc()).all()
+        return render_template('blog.html', posts=user_posts, user=user)
+    if not id and not username:
         return render_template('blog.html', posts=posts)
-    else:
+    #if not id:
+    #    return render_template('blog.html', posts=posts)
+    #else:
         #if there is an 'id' param, display a single post on the entry page
-        blog = Blog.query.get(id)
-        return render_template('entry.html', blog=blog)
+    #    blog = Blog.query.get(id)
+     #   user = User.query.filter_by(id=blog.owner_id).first()
+      #  return render_template('entry.html', blog=blog, author=user.username)
 
 #newpost route that should allow a person to enter a new post
 @app.route('/newpost', methods=['POST', 'GET'])
