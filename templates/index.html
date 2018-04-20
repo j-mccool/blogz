@@ -6,7 +6,7 @@
         <h1 class="text-center">Authors</h1>
         <div class="row">
         {% for user in users %}
-                {% set link = user.id%}
+                {% set link = user.username%}
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">{{user.username}}</h4>
