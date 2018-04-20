@@ -62,6 +62,18 @@ def require_log():
         flash("Please log in first!", 'error')
         return redirect('/login')
 
+#new index route to act as homepage, listing all usernames
+@app.route('/')
+def index():
+    users = User.query.all()
+    user_id = request.args.get('user')
+    if not user_id:
+        return render_template('index.html', users = users)
+    else:
+        user = User.query.get(user_id)
+        user_posts = Blog.query.filter_by(owner_id=user).order_by(Blog.post_date.desc()).all()
+        return render_template('blog.html', posts=user_posts)
+
 #main route that should display all posts: most recent first
 @app.route('/blog')
 def blog():
