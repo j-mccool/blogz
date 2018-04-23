@@ -1,6 +1,7 @@
 from flask import Flask, redirect, request, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from hashutils import check_pw_hash, make_pw_hash
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -31,12 +32,12 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(120))
-    password = db.Column(db.String(30))
+    pw_hash = db.Column(db.String(120))
     blogs = db.relationship('Blog', backref='owner')
 
     def __init__(self, username, password):
         self.username = username
-        self.password = password
+        self.pw_hash = make_pw_hash(password)
 
 class Logs(db.Model):
 
@@ -92,13 +93,6 @@ def blog():
         return render_template('blog.html', posts=user_posts, user=user)
     if not id and not username:
         return render_template('blog.html', posts=posts)
-    #if not id:
-    #    return render_template('blog.html', posts=posts)
-    #else:
-        #if there is an 'id' param, display a single post on the entry page
-    #    blog = Blog.query.get(id)
-     #   user = User.query.filter_by(id=blog.owner_id).first()
-      #  return render_template('entry.html', blog=blog, author=user.username)
 
 #newpost route that should allow a person to enter a new post
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -117,7 +111,7 @@ def newpost():
             error = 'yes'
             flash("Please enter some text for your post.", 'error')
 
-        if not error and not error:    
+        if not error:    
             new_post = Blog(blog_title, blog_body, owner)
             db.session.add(new_post)
             db.session.commit()
@@ -170,7 +164,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
-        if user and user.password == password:
+        if user and check_pw_hash(password, user.pw_hash):
             session['username'] = username
             flash('Logged In!', 'success')
             return redirect('/newpost')

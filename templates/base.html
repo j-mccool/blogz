@@ -8,7 +8,7 @@
         crossorigin="anonymous" />
 
 </head>
-
+</style>
 <nav class="navbar navbar-expand-lg fixed-top ">
     <a class="navbar-brand" href="/blog">Blog Posts</a>
     <a class="navbar-brand" href="/">Authors</a>
@@ -41,11 +41,11 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="messages">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% with messages = get_flashed_messages(with_categories=True) %}
                         {% if messages %}
-                        <ul>
+                        <ul class="flashes">
                             {% for category, message in messages %}
-                            <li class="{{ cagetory }}">{{ message }}</li>
+                            <li class="{{ category }}">{{ message }}</li>
                             {% endfor %}
                         </ul>
                         {% endif %}
@@ -53,9 +53,11 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="status">
-                    {% if session %} Status - Logged In {% else %} Status -Not Logged In {% endif %}
-                </div>
+                {% if session %}
+                <div class="status">Status - Logged In</div>
+                {% else %}
+                <div class="error">Status - Not Logged In</div>
+                {% endif %}
             </div>
         </div>
     </div>
