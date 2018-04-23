@@ -45,15 +45,23 @@ class Logs(db.Model):
     ip = db.Column(db.String(20))
     agent = db.Column(db.String(500))
     username = db.Column(db.String(120))
-    password = db.Column(db.String(30))
-    success = db.Column(db.Boolean)
+    result = db.Column(db.Integer)
 
-    def __init__(self, ip, agent, username, password, success):
+    def __init__(self, ip, agent, username, result):
         self.ip = ip
         self.username = username
-        self.password = password
         self.agent = agent
-        self.success = False
+        self.result = result
+
+#we're going to log the user agent and ip address of those that attempt to register and log in
+def log_attempt(ip, agent, username, result):
+    ip = ip
+    agent = agent
+    username = username
+    result = result
+    log = Logs(ip, agent, username, result)
+    db.session.add(log)
+    db.session.commit()
 
 #redirect to /login page if there is no active session
 @app.before_request
@@ -129,6 +137,8 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         verify = request.form['verify']
+        agent = request.headers.get('User-Agent')
+        ip = request.headers.get('X-Forwarded-For', request.remote_addr)
 
         error = ''
         #validation for signup; if error set value, create flash message with category
@@ -148,6 +158,8 @@ def signup():
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
+                result = 4
+                log_attempt(ip, agent, username, result)
                 flash('New User Created - Logged In!', 'success')
                 return redirect('/newpost')
             else:
@@ -164,15 +176,24 @@ def login():
         username = request.form['username']
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
+        agent = request.headers.get('User-Agent')
+        ip = request.headers.get('X-Forwarded-For', request.remote_addr)
         if user and check_pw_hash(password, user.pw_hash):
             session['username'] = username
+            result = 0
+            log_attempt(ip, agent, username, result)
             flash('Logged In!', 'success')
             return redirect('/newpost')
         elif not user:
+            result = 1
+            log_attempt(ip, agent, username, result)
             flash('Username does not exist. Please try again!', 'error')
             return redirect('/login')
         else:
+            result = 2
+            log_attempt(ip, agent, username, result)
             flash('Incorrect password. Please try again.', 'error')
+
     return render_template('login.html')
 
 @app.route('/logout')
